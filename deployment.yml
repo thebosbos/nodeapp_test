@@ -1,8 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kubernetes
-  namespace: default
+  name: nodeapp-deployment
   labels:
     app: nodeapp
 spec:
