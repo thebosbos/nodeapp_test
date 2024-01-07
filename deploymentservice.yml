@@ -1,23 +1,38 @@
-# deployment.yaml
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-deployment
+  name: nodeapp-deployment
+  labels:
+    app: nodeapp
 spec:
-  replicas: 3  # Number of replicas/pods to maintain
+  replicas: 1
   selector:
     matchLabels:
-      app: myapp  # Label to match pods
+      app: nodeapp
   template:
     metadata:
       labels:
-        app: myapp  # Label for pods
+        app: nodeapp 
     spec:
       containers:
-      - name: myapp-container
-        image: ggezskrub/nodeapp:latest # Replace with your container image details
+      - name: nodeserver
+        image: ggezskrub/nodeapp:latest
         ports:
-        - containerPort: 3000 # Port on which the container listens
+        - containerPort: 3000
+        
+        
+---
 
-
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp-service
+spec:
+  selector:
+    app: nodeapp 
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 3000
+    nodePort: 31110
