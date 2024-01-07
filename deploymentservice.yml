@@ -1,7 +1,8 @@
+# Deployment YAML
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kubernetes
+  name: nodeapp-deployment  # Updated deployment name
   namespace: default
   labels:
     app: nodeapp
@@ -20,14 +21,14 @@ spec:
         image: ggezskrub/nodeapp:latest
         ports:
         - containerPort: 3000
-        
-        
+
 ---
 
+# Service YAML
 apiVersion: v1
 kind: Service
 metadata:
-  name: kubernetes
+  name: nodeapp-service  # Updated service name
   namespace: default
 spec:
   selector:
